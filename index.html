@@ -5,14 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lean & Kaizen Quiz</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
+      font-family: 'Segoe UI', sans-serif;
       background: url('Chung-Jye-Investment-Holding-Co.-Ltd..png') no-repeat center center fixed;
       background-size: cover;
       color: white;
-      text-align: center;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -20,64 +23,85 @@
 
     header {
       background-color: rgba(0, 0, 0, 0.6);
-      padding: 20px 0;
-      font-size: 28px;
+      padding: 20px 15px;
+      font-size: 32px;
       font-weight: bold;
-      backdrop-filter: blur(4px);
+      text-align: center;
+      backdrop-filter: blur(5px);
     }
 
     .quiz-container {
-      margin-top: 60px;
+      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 20px;
       align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      gap: 20px;
       background-color: rgba(0, 0, 0, 0.4);
-      padding: 40px;
-      border-radius: 15px;
-      margin: auto;
+      margin: 40px auto;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+      backdrop-filter: blur(4px);
     }
 
     .quiz-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 240px;
-      padding: 15px 25px;
+      width: 100%;
+      max-width: 300px;
+      padding: 14px 20px;
       font-size: 18px;
-      background-color: #009688;
+      background-color: #00b894;
       color: white;
       border: none;
       border-radius: 10px;
       text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       transition: background-color 0.3s, transform 0.2s;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .quiz-button:hover {
-      background-color: #00796b;
-      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
     .quiz-button i {
       margin-right: 10px;
     }
 
-    footer {
-      margin-top: auto;
-      padding: 20px;
-      font-size: 14px;
-      background-color: rgba(0, 0, 0, 0.6);
+    .quiz-button:hover {
+      background-color: #019170;
+      transform: scale(1.05);
     }
 
-    @media (max-width: 480px) {
+    footer {
+      background-color: rgba(0, 0, 0, 0.6);
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 24px;
+        padding: 15px;
+      }
+
+      .quiz-container {
+        padding: 20px 15px;
+        gap: 15px;
+        margin: 20px auto;
+      }
+
       .quiz-button {
-        width: 80%;
+        font-size: 16px;
+        padding: 12px;
+      }
+
+      footer {
+        font-size: 12px;
+        padding: 15px;
       }
     }
   </style>
-
-  <!-- Font Awesome for icons -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -107,4 +131,3 @@
 
 </body>
 </html>
-
