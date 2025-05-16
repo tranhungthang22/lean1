@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lean & Kaizen Quiz</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+      background: url('Chung-Jye-Investment-Holding-Co.-Ltd..png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
       display: flex;
       flex-direction: column;
-      align-items: center;
       min-height: 100vh;
     }
 
     header {
-      background-color: #00796b;
-      width: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
       padding: 20px 0;
-      text-align: center;
-      color: white;
       font-size: 28px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      font-weight: bold;
+      backdrop-filter: blur(4px);
     }
 
     .quiz-container {
@@ -32,6 +32,10 @@
       flex-direction: column;
       gap: 20px;
       align-items: center;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 40px;
+      border-radius: 15px;
+      margin: auto;
     }
 
     .quiz-button {
@@ -47,12 +51,12 @@
       border-radius: 10px;
       text-decoration: none;
       transition: background-color 0.3s, transform 0.2s;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .quiz-button:hover {
       background-color: #00796b;
-      transform: translateY(-2px);
+      transform: scale(1.05);
     }
 
     .quiz-button i {
@@ -63,8 +67,7 @@
       margin-top: auto;
       padding: 20px;
       font-size: 14px;
-      color: #666;
-      text-align: center;
+      background-color: rgba(0, 0, 0, 0.6);
     }
 
     @media (max-width: 480px) {
