@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lean Basic Test </title>
+  <title>Lean Basic Test</title>
   <style>
     * {
       box-sizing: border-box;
@@ -46,6 +47,18 @@
       backdrop-filter: blur(4px);
     }
 
+    /* Hiệu ứng xuất hiện từ từ */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .quiz-button {
       width: 100%;
       max-width: 300px;
@@ -61,7 +74,16 @@
       align-items: center;
       transition: background-color 0.3s, transform 0.2s;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards;
     }
+
+    /* Tạo độ trễ cho từng nút */
+    .quiz-button:nth-child(1) { animation-delay: 0.2s; }
+    .quiz-button:nth-child(2) { animation-delay: 0.4s; }
+    .quiz-button:nth-child(3) { animation-delay: 0.6s; }
+    .quiz-button:nth-child(4) { animation-delay: 0.8s; }
+    .quiz-button:nth-child(5) { animation-delay: 1s; }
 
     .quiz-button i {
       margin-right: 10px;
