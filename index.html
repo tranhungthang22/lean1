@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lean Basic Test</title>
+  <title>Lean Basic Test - Đăng nhập</title>
   <style>
     * {
       box-sizing: border-box;
@@ -20,50 +19,54 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-    }
-
-    header {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 20px 15px;
-      font-size: 32px;
-      font-weight: bold;
-      text-align: center;
-      backdrop-filter: blur(5px);
-    }
-
-    .quiz-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px 20px;
-      gap: 20px;
-      background-color: rgba(0, 0, 0, 0.4);
-      margin: 40px auto;
-      border-radius: 16px;
-      width: 90%;
-      max-width: 500px;
-      backdrop-filter: blur(4px);
     }
 
-  
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px 20px;
+      border-radius: 16px;
+      backdrop-filter: blur(6px);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .container.active {
+      display: flex;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    button {
+      padding: 12px;
+      font-size: 18px;
+      background-color: #00b894;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #019170;
     }
 
     .quiz-button {
       width: 100%;
-      max-width: 300px;
-      padding: 14px 20px;
-      font-size: 18px;
+      padding: 14px;
+      font-size: 16px;
       background-color: #00b894;
       color: white;
       border: none;
@@ -73,20 +76,6 @@
       justify-content: center;
       align-items: center;
       transition: background-color 0.3s, transform 0.2s;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      opacity: 0;
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
-  
-    .quiz-button:nth-child(1) { animation-delay: 0.3s; }
-    .quiz-button:nth-child(2) { animation-delay: 0.5s; }
-    .quiz-button:nth-child(3) { animation-delay: 0.7s; }
-    .quiz-button:nth-child(4) { animation-delay: 0.9s; }
-    .quiz-button:nth-child(5) { animation-delay: 1.1s; }
-
-    .quiz-button i {
-      margin-right: 10px;
     }
 
     .quiz-button:hover {
@@ -94,45 +83,40 @@
       transform: scale(1.05);
     }
 
-    footer {
-      background-color: rgba(0, 0, 0, 0.6);
+    header, footer {
       text-align: center;
       padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 100%;
+    }
+
+    footer {
       font-size: 14px;
+      position: absolute;
+      bottom: 0;
     }
 
-    @media (max-width: 600px) {
-      header {
-        font-size: 24px;
-        padding: 15px;
-      }
-
-      .quiz-container {
-        padding: 20px 15px;
-        gap: 15px;
-        margin: 20px auto;
-      }
-
-      .quiz-button {
-        font-size: 16px;
-        padding: 12px;
-      }
-
-      footer {
-        font-size: 12px;
-        padding: 15px;
-      }
+    .hidden {
+      display: none;
     }
+
   </style>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <header>
-    Lean Basic Test
-  </header>
+  <!-- Đăng nhập -->
+  <div class="container active" id="login-section">
+    <h2>Nhập mã số thẻ để tiếp tục</h2>
+    <input type="text" id="card-id" placeholder="Nhập mã số thẻ..." />
+    <button onclick="login()">Đăng nhập</button>
+    <p id="error" style="color: #ff7675;"></p>
+  </div>
 
-  <div class="quiz-container">
+  <!-- Bài quiz -->
+  <header class="hidden" id="quiz-header">Lean Basic Test</header>
+
+  <div class="container hidden" id="quiz-section">
     <a class="quiz-button" href="https://quizizz.com/join?gc=364958" target="_blank">
       <i class="fas fa-play-circle"></i> KAIZEN
     </a>
@@ -140,7 +124,7 @@
       <i class="fas fa-play-circle"></i> SWS & Line balancing
     </a>
     <a class="quiz-button" href="https://quizizz.com/join?gc=641920" target="_blank">
-      <i class="fas fa-play-circle"></i> Takt time/cycle time
+      <i class="fas fa-play-circle"></i> Takt time / Cycle time
     </a>
     <a class="quiz-button" href="https://quizizz.com/join?gc=198115" target="_blank">
       <i class="fas fa-lightbulb"></i> 6S
@@ -150,9 +134,27 @@
     </a>
   </div>
 
-  <footer>
+  <footer class="hidden" id="quiz-footer">
     © 2025 | Created by Lean Team
   </footer>
+
+  <script>
+    function login() {
+      const cardId = document.getElementById("card-id").value.trim();
+      const error = document.getElementById("error");
+
+      if (cardId === "") {
+        error.textContent = "Vui lòng nhập mã số thẻ.";
+        return;
+      }
+
+     
+      document.getElementById("login-section").classList.remove("active");
+      document.getElementById("quiz-section").classList.remove("hidden");
+      document.getElementById("quiz-header").classList.remove("hidden");
+      document.getElementById("quiz-footer").classList.remove("hidden");
+    }
+  </script>
 
 </body>
 </html>
