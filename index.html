@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lean Basic Test - Đăng nhập</title>
+  <title>Lean Basic Test</title>
   <style>
     * {
       box-sizing: border-box;
@@ -16,57 +16,41 @@
       background: url('Chung-Jye-Investment-Holding-Co.-Ltd..png') no-repeat center center fixed;
       background-size: cover;
       color: white;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px 15px;
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .quiz-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-
-    .container {
-      background-color: rgba(0, 0, 0, 0.6);
       padding: 30px 20px;
-      border-radius: 16px;
-      backdrop-filter: blur(6px);
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
-      display: none;
-      flex-direction: column;
       gap: 20px;
-    }
-
-    .container.active {
-      display: flex;
-    }
-
-    input {
-      padding: 12px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      width: 100%;
-    }
-
-    button {
-      padding: 12px;
-      font-size: 18px;
-      background-color: #00b894;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #019170;
+      background-color: rgba(0, 0, 0, 0.4);
+      margin: 40px auto;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+      backdrop-filter: blur(4px);
     }
 
     .quiz-button {
       width: 100%;
-      padding: 14px;
-      font-size: 16px;
+      max-width: 300px;
+      padding: 14px 20px;
+      font-size: 18px;
       background-color: #00b894;
       color: white;
       border: none;
@@ -78,45 +62,118 @@
       transition: background-color 0.3s, transform 0.2s;
     }
 
+    .quiz-button i {
+      margin-right: 10px;
+    }
+
     .quiz-button:hover {
       background-color: #019170;
       transform: scale(1.05);
     }
 
-    header, footer {
+    footer {
+      background-color: rgba(0, 0, 0, 0.6);
       text-align: center;
       padding: 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      width: 100%;
+      font-size: 14px;
     }
 
-    footer {
-      font-size: 14px;
-      position: absolute;
-      bottom: 0;
+    /* Đăng nhập overlay */
+    .login-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .login-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .login-box input {
+      padding: 12px;
+      font-size: 16px;
+      width: 100%;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .login-box button {
+      padding: 12px;
+      width: 100%;
+      font-size: 18px;
+      background-color: #00b894;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background-color: #019170;
     }
 
     .hidden {
-      display: none;
+      display: none !important;
     }
 
+    @media (max-width: 600px) {
+      header {
+        font-size: 24px;
+        padding: 15px;
+      }
+
+      .quiz-container {
+        padding: 20px 15px;
+        gap: 15px;
+        margin: 20px auto;
+      }
+
+      .quiz-button {
+        font-size: 16px;
+        padding: 12px;
+      }
+
+      footer {
+        font-size: 12px;
+        padding: 15px;
+      }
+    }
   </style>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <!-- Đăng nhập -->
-  <div class="container active" id="login-section">
-    <h2>Nhập mã số thẻ để tiếp tục</h2>
-    <input type="text" id="card-id" placeholder="Nhập mã số thẻ..." />
-    <button onclick="login()">Đăng nhập</button>
-    <p id="error" style="color: #ff7675;"></p>
+  <!-- Overlay đăng nhập -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+      <h2>Vui lòng nhập mã số thẻ</h2>
+      <input type="text" id="cardIdInput" placeholder="Nhập mã số thẻ..." />
+      <button onclick="submitCardId()">Đăng nhập</button>
+      <p id="loginError" style="color: #ff7675; margin-top: 10px;"></p>
+    </div>
   </div>
 
-  <!-- Bài quiz -->
-  <header class="hidden" id="quiz-header">Lean Basic Test</header>
+  <!-- Giao diện quiz -->
+  <header>
+    Lean Basic Test
+  </header>
 
-  <div class="container hidden" id="quiz-section">
+  <div class="quiz-container">
     <a class="quiz-button" href="https://quizizz.com/join?gc=364958" target="_blank">
       <i class="fas fa-play-circle"></i> KAIZEN
     </a>
@@ -134,22 +191,22 @@
     </a>
   </div>
 
-  <footer class="hidden" id="quiz-footer">
+  <footer>
     © 2025 | Created by Lean Team
   </footer>
 
   <script>
-    function login() {
-      const cardId = document.getElementById("card-id").value.trim();
-      const error = document.getElementById("error");
+    function submitCardId() {
+      const input = document.getElementById("cardIdInput").value.trim();
+      const error = document.getElementById("loginError");
 
-      if (cardId === "") {
+      if (input === "") {
         error.textContent = "Vui lòng nhập mã số thẻ.";
         return;
       }
 
-     
-      
+      // Ẩn lớp phủ đăng nhập
+      document.getElementById("loginOverlay").classList.add("hidden");
     }
   </script>
 
