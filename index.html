@@ -59,6 +59,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
       transition: background-color 0.3s, transform 0.2s;
       opacity: 0;
       transform: translateY(20px);
@@ -73,64 +74,40 @@
       transform: scale(1.05);
     }
 
+    .sub-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+      animation: fadeInUp 0.5s ease forwards;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .sub-button {
+      padding: 12px;
+      background-color: #0984e3;
+      color: white;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background-color 0.3s;
+    }
+
+    .sub-button:hover {
+      background-color: #006dc2;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
     footer {
       background-color: rgba(0, 0, 0, 0.6);
       text-align: center;
       padding: 20px;
       font-size: 14px;
-    }
-
-    /* Đăng nhập overlay */
-    .login-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(5px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      flex-direction: column;
-      padding: 20px;
-    }
-
-    .login-box {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 30px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-    }
-
-    .login-box input {
-      padding: 12px;
-      font-size: 16px;
-      width: 100%;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      border: none;
-    }
-
-    .login-box button {
-      padding: 12px;
-      width: 100%;
-      font-size: 18px;
-      background-color: #00b894;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .login-box button:hover {
-      background-color: #019170;
-    }
-
-    .hidden {
-      display: none !important;
     }
 
     @media (max-width: 600px) {
@@ -156,7 +133,6 @@
       }
     }
 
-    /* Hiệu ứng fade-in */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -172,6 +148,7 @@
       animation: fadeInUp 0.6s ease forwards;
     }
   </style>
+
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -181,9 +158,23 @@
   </header>
 
   <div class="quiz-container">
-    <a class="quiz-button" href="https://docs.google.com/forms/d/e/1FAIpQLSfrKZsbr7h7R9AvZGIgWMX-WSNuKrxO7tLEPUmRIgfCFNjhcA/viewform?usp=header" target="_blank">
+
+    <!-- Nút C2B không có link -->
+    <div class="quiz-button" id="c2bButton">
       <i class="fas fa-play-circle"></i> C2B
-    </a>
+    </div>
+
+    <!-- 6 nút nhỏ bên trong C2B -->
+    <div class="sub-buttons hidden" id="c2bSubButtons">
+      <a class="sub-button" href="https://example.com/form1" target="_blank">C2B - Xưởng 1</a>
+      <a class="sub-button" href="https://example.com/form2" target="_blank">C2B - Xưởng 2 2</a>
+      <a class="sub-button" href="https://example.com/form3" target="_blank">C2B - Xưởng 3 3</a>
+      <a class="sub-button" href="https://example.com/form4" target="_blank">C2B - Xưởng 6 4</a>
+      <a class="sub-button" href="https://example.com/form5" target="_blank">C2B - Xưởng A</a>
+      <a class="sub-button" href="https://example.com/form6" target="_blank">C2B - Xưởng B</a>
+    </div>
+
+    <!-- Các nút khác -->
     <a class="quiz-button" href="https://docs.google.com/forms/d/e/1FAIpQLSd5Suhy4mfkZ2e-Eh01Jr439FdnP_SmmQ_KsAFdT3ZVAWEPTg/viewform?usp=header" target="_blank">
       <i class="fas fa-play-circle"></i> Treatment - Chuyền ngoài
     </a>
@@ -200,30 +191,22 @@
   </footer>
 
   <script>
-    function submitCardId() {
-      const input = document.getElementById("cardIdInput")?.value.trim();
-      const error = document.getElementById("loginError");
-
-      if (input === "") {
-        if (error) error.textContent = "Vui lòng nhập mã số thẻ.";
-        return;
-      }
-
-      document.getElementById("loginOverlay")?.classList.add("hidden");
-    }
-
     // Hiệu ứng xuất hiện lần lượt các nút
     window.addEventListener("DOMContentLoaded", () => {
       const buttons = document.querySelectorAll(".quiz-button");
       buttons.forEach((btn, index) => {
         setTimeout(() => {
           btn.classList.add("fade-in");
-        }, index * 300); // delay giữa các nút
+        }, index * 300);
       });
+    });
+
+    // Toggle hiển thị nút con C2B
+    document.getElementById("c2bButton").addEventListener("click", () => {
+      const subButtons = document.getElementById("c2bSubButtons");
+      subButtons.classList.toggle("hidden");
     });
   </script>
 
 </body>
 </html>
-
-
